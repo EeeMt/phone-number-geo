@@ -10,8 +10,14 @@ import java.util.Optional;
  **/
 public interface LookupAlgorithm {
 
+    /**
+     * 转载数据库
+     */
     void loadData(byte[] data);
 
-    Optional<PhoneNumberInfo> lookup(String ori);
+    /**
+     * 根据电话号码查找归属地
+     */
+    Optional<PhoneNumberInfo> lookup(String phoneNumber);
 
 }
