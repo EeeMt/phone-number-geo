@@ -15,26 +15,24 @@ import java.util.Optional;
  * 2019/10/19 00:12
  **/
 @Slf4j
-public class NewBinarySearchAlgorithmImpl implements LookupAlgorithm {
-    private ByteBuffer byteBuffer;
+public class AnotherBinarySearchAlgorithmImpl implements LookupAlgorithm {
+    private ByteBuffer originalByteBuffer;
     private int indicesStartOffset;
     private int indicesEndOffset;
-    private int recordTotal;
 
     @Override
     public void loadData(byte[] data) {
-        byteBuffer = ByteBuffer.wrap(data).asReadOnlyBuffer();
-        byteBuffer.order(ByteOrder.LITTLE_ENDIAN);
-        int dataVersion = byteBuffer.getInt();
-        //System.out.println(dataVersion);
-        indicesStartOffset = byteBuffer.getInt(4);
-        indicesEndOffset = byteBuffer.limit();
-        recordTotal = (byteBuffer.capacity() - indicesStartOffset) / 9;
+        originalByteBuffer = ByteBuffer.wrap(data).asReadOnlyBuffer();
+        originalByteBuffer.order(ByteOrder.LITTLE_ENDIAN);
+        int dataVersion = originalByteBuffer.getInt();
+        indicesStartOffset = originalByteBuffer.getInt(4);
+        indicesEndOffset = originalByteBuffer.limit();
     }
 
     @Override
     public Optional<PhoneNumberInfo> lookup(String phoneNo) {
         log.trace("try to resolve attribution of: {}", phoneNo);
+        ByteBuffer byteBuffer = originalByteBuffer.asReadOnlyBuffer().order(ByteOrder.LITTLE_ENDIAN);
         if (phoneNo == null) {
             log.debug("phoneNo is null");
             return Optional.empty();
@@ -60,7 +58,7 @@ public class NewBinarySearchAlgorithmImpl implements LookupAlgorithm {
             if (mid == right) {
                 return Optional.empty();
             }
-            int compare = compare(mid, attributionIdentity);
+            int compare = compare(mid, attributionIdentity, byteBuffer);
             if (compare == 0) {
                 break;
             }
@@ -106,8 +104,6 @@ public class NewBinarySearchAlgorithmImpl implements LookupAlgorithm {
         int resultBufferSize = 200;
         int increase = 100;
         byte[] bytes = new byte[resultBufferSize];
-        //while ((byteBuffer.get()) != 0) {
-        //}
         byte b;
         int i;
         for (i = 0; (b = byteBuffer.get()) != 0; i++) {
@@ -128,7 +124,7 @@ public class NewBinarySearchAlgorithmImpl implements LookupAlgorithm {
         return Optional.of(new PhoneNumberInfo(phoneNo, build, isp.get()));
     }
 
-    private int compare(int position, int key) {
+    private int compare(int position, int key, ByteBuffer byteBuffer) {
         byteBuffer.position(position);
         int phonePrefix = 0;
         try {

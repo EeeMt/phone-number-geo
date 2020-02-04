@@ -3,11 +3,11 @@ package me.ihxq.projects.pna;
 import lombok.extern.slf4j.Slf4j;
 import me.ihxq.projects.pna.algorithm.BinarySearchAlgorithmImpl;
 import org.junit.Test;
-import org.junit.runner.Description;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Stream;
 
 /**
  * @author xq.h
@@ -15,19 +15,25 @@ import java.util.concurrent.TimeUnit;
  **/
 @Slf4j
 public class PhoneNumberLookupTest {
-    private static void logInfo(Description description, String status, long nanos) {
-        String testName = description.getMethodName();
-        log.info(String.format("Test %s %s, spent %d microseconds",
-                testName, status, TimeUnit.NANOSECONDS.toMicros(nanos)));
-    }
 
     @Test
     public void lookup() throws IOException, URISyntaxException {
         PhoneNumberLookup phoneNumberLookup = new PhoneNumberLookup(new BinarySearchAlgorithmImpl());
-        //phoneNumberLookup = new PhoneNumberLookup(new SimpleLookupAlgorithmImpl());
+        //phoneNumberLookup =  new PhoneNumberLookup(new SequenceLookupAlgorithmImpl());
         phoneNumberLookup.lookup("16431182745").ifPresent(System.out::println);
         phoneNumberLookup.lookup("13678186961").ifPresent(System.out::println);
         phoneNumberLookup.lookup("18798896741").ifPresent(System.out::println);
         phoneNumberLookup.lookup("13699057030").ifPresent(System.out::println);
+    }
+
+    @Test
+    public void concurrencyLookup() {
+        PhoneNumberLookup phoneNumberLookup = new PhoneNumberLookup(new BinarySearchAlgorithmImpl());
+        Stream.generate(() -> {
+            long phoneNumber = (long) (ThreadLocalRandom.current().nextDouble(1D, 2D) * 1000_000_000_0L);
+            return String.valueOf(phoneNumber);
+        }).limit(200_000)
+                .parallel()
+                .forEach(v -> phoneNumberLookup.lookup(v).ifPresent(System.out::println));
     }
 }

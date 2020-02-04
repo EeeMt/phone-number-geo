@@ -15,42 +15,61 @@ import java.util.Optional;
  **/
 @Slf4j
 public class BinarySearchAlgorithmImpl implements LookupAlgorithm {
-    private ByteBuffer byteBuffer;
+    private ByteBuffer originalByteBuffer;
     private int indicesStartOffset;
     private int indicesEndOffset;
-    private int recordTotal;
 
     @Override
     public void loadData(byte[] data) {
-        byteBuffer = ByteBuffer.wrap(data)
+        originalByteBuffer = ByteBuffer.wrap(data)
                 .asReadOnlyBuffer()
                 .order(ByteOrder.LITTLE_ENDIAN);
-        int dataVersion = byteBuffer.getInt();
-        System.out.println(dataVersion);
-        indicesStartOffset = byteBuffer.getInt(4);
-        indicesEndOffset = byteBuffer.capacity();
-        recordTotal = (byteBuffer.capacity() - indicesStartOffset) / 9;
+        int dataVersion = originalByteBuffer.getInt(); // dataVersion not valid, don't know why
+        indicesStartOffset = originalByteBuffer.getInt(4);
+        indicesEndOffset = originalByteBuffer.capacity();
+    }
+
+    /**
+     * 对齐
+     */
+    private int strictMid(int mid) {
+        int remain = (mid - indicesStartOffset) % 9;
+        if (mid - indicesStartOffset < 9) {
+            return mid - remain;
+        } else if (remain != 0) {
+            return mid + 9 - remain;
+        } else {
+            return mid;
+        }
+    }
+
+    private boolean isInvalidPhoneNumber(String phoneNumber) {
+        if (phoneNumber == null) {
+            log.debug("phone number is null");
+            return true;
+        }
+        int phoneNumberLength = phoneNumber.length();
+        if (phoneNumberLength < 7 || phoneNumberLength > 11) {
+            log.debug("phone number {} is not acceptable, length invalid, length should be 11 or 7(for left 7 numbers), actual: {}",
+                    phoneNumber, phoneNumberLength);
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public Optional<PhoneNumberInfo> lookup(String phoneNo) {
-        log.trace("try to resolve attribution of: {}", phoneNo);
-        if (phoneNo == null) {
-            log.debug("phoneNo is null");
+    public Optional<PhoneNumberInfo> lookup(String phoneNumber) {
+        log.trace("try to resolve attribution of phone number: {}", phoneNumber);
+        ByteBuffer byteBuffer = originalByteBuffer.asReadOnlyBuffer().order(ByteOrder.LITTLE_ENDIAN);
+        //ByteBuffer byteBuffer = originalByteBuffer.asReadOnlyBuffer().order(ByteOrder.LITTLE_ENDIAN);
+        if (isInvalidPhoneNumber(phoneNumber)) {
             return Optional.empty();
         }
-        int phoneNoLength = phoneNo.length();
-        if (phoneNoLength < 7 || phoneNoLength > 11) {
-            log.debug("phoneNo {} is not acceptable, length invalid, length should range 7 to 11, actual: {}",
-                    phoneNo, phoneNoLength);
-            return Optional.empty();
-        }
-
         int attributionIdentity;
         try {
-            attributionIdentity = Integer.parseInt(phoneNo.substring(0, 7));
+            attributionIdentity = Integer.parseInt(phoneNumber.substring(0, 7));
         } catch (NumberFormatException e) {
-            log.debug("phoneNo {} is invalid, is it numeric?", phoneNo);
+            log.debug("phone number {} is invalid, is it numeric?", phoneNumber);
             return Optional.empty();
         }
         int left = indicesStartOffset;
@@ -60,77 +79,65 @@ public class BinarySearchAlgorithmImpl implements LookupAlgorithm {
             if (mid == right) {
                 return Optional.empty();
             }
-            int compare = compare(mid, attributionIdentity);
-            if (compare == 0) {
-                break;
-            }
+            int compare = compare(mid, attributionIdentity, byteBuffer);
             if (mid == left) {
                 return Optional.empty();
             }
 
-            if (compare > 0) {
+            if (compare == 0) {
+                return extract(phoneNumber, mid, byteBuffer);
+            } else if (compare > 0) {
                 int tempMid = (mid + left) / 2;
                 right = mid;
-                int remain = (tempMid - indicesStartOffset) % 9;
-                if (tempMid - indicesStartOffset < 9) {
-                    mid = tempMid - remain;
-                    continue;
-                }
-                if (remain != 0) {
-                    mid = tempMid + 9 - remain;
-                } else {
-                    mid = tempMid;
-                }
+                mid = strictMid(tempMid);
             } else {
                 int tempMid = (mid + right) / 2;
                 left = mid;
-                int remain = (tempMid - indicesStartOffset) % 9;
-                if (tempMid - indicesStartOffset < 9) {
-                    mid = tempMid - remain;
-                    continue;
-                }
-                if (remain != 0) {
-                    mid = tempMid + 9 - remain;
-                } else {
-                    mid = tempMid;
-                }
+                mid = strictMid(tempMid);
             }
         }
+        return Optional.empty();
+    }
 
-        byteBuffer.position(mid);
-        int prefix = byteBuffer.getInt();
+    private Optional<PhoneNumberInfo> extract(String phoneNumber, int indexStart, ByteBuffer byteBuffer) {
+        byteBuffer.position(indexStart);
+        int prefix = byteBuffer.getInt(); // it is necessary
         int infoStartIndex = byteBuffer.getInt();
         byte ispMark = byteBuffer.get();
-        Optional<ISP> isp = ISP.of(ispMark);
+        ISP isp = ISP.of(ispMark).orElse(ISP.UNKNOWN);
+
+        byte[] bytes = new byte[determineInfoLength(infoStartIndex, byteBuffer)];
+        byteBuffer.get(bytes);
+        String oriString = new String(bytes);
+        Attribution attribution = parse(oriString);
+
+        return Optional.of(new PhoneNumberInfo(phoneNumber, attribution, isp));
+    }
+
+    private int determineInfoLength(int infoStartIndex, ByteBuffer byteBuffer) {
         byteBuffer.position(infoStartIndex);
         //noinspection StatementWithEmptyBody
         while ((byteBuffer.get()) != 0) {
+            // just to find index of next '\0'
         }
         int infoEnd = byteBuffer.position() - 1;
-        byteBuffer.position(infoStartIndex);
-        int length = infoEnd - infoStartIndex;
-        byte[] bytes = new byte[length];
-        byteBuffer.get(bytes, 0, length);
-        String oriString = new String(bytes);
-        String[] split = oriString.split("\\|");
-        Attribution build = Attribution.builder()
+        byteBuffer.position(infoStartIndex); //reset to info start index
+        return infoEnd - infoStartIndex;
+    }
+
+    private Attribution parse(String ori) {
+        String[] split = ori.split("\\|");
+        return Attribution.builder()
                 .province(split[0])
                 .city(split[1])
                 .zipCode(split[2])
                 .areaCode(split[3])
                 .build();
-        return Optional.of(new PhoneNumberInfo(phoneNo, build, isp.orElse(ISP.UNKNOWN)));
     }
 
-    private int compare(int position, int key) {
+    private int compare(int position, int key, ByteBuffer byteBuffer) {
         byteBuffer.position(position);
-        int phonePrefix = 0;
-        try {
-            phonePrefix = byteBuffer.getInt();
-        } catch (Exception e) {
-            System.out.println("position: " + position);
-            throw new RuntimeException(e);
-        }
+        int phonePrefix = byteBuffer.getInt();
         return Integer.compare(phonePrefix, key);
     }
 }

@@ -14,17 +14,16 @@ import java.util.Optional;
  * 2019/10/19 00:12
  **/
 @Slf4j
-public class SimpleLookupAlgorithmImpl implements LookupAlgorithm {
-    private ByteBuffer byteBuffer;
+public class SequenceLookupAlgorithmImpl implements LookupAlgorithm {
+    private ByteBuffer originalByteBuffer;
     private int indicesOffset;
 
     @Override
     public void loadData(byte[] data) {
-        byteBuffer = ByteBuffer.wrap(data).asReadOnlyBuffer();
-        byteBuffer.order(ByteOrder.LITTLE_ENDIAN);
-        int dataVersion = byteBuffer.getInt();
-        //System.out.println(dataVersion);
-        indicesOffset = byteBuffer.getInt(4);
+        originalByteBuffer = ByteBuffer.wrap(data).asReadOnlyBuffer();
+        originalByteBuffer.order(ByteOrder.LITTLE_ENDIAN);
+        int dataVersion = originalByteBuffer.getInt();
+        indicesOffset = originalByteBuffer.getInt(4);
     }
 
     /**
@@ -33,6 +32,7 @@ public class SimpleLookupAlgorithmImpl implements LookupAlgorithm {
      */
     @Override
     public Optional<PhoneNumberInfo> lookup(String phoneNo) {
+        ByteBuffer byteBuffer = originalByteBuffer.asReadOnlyBuffer().order(ByteOrder.LITTLE_ENDIAN);
         log.trace("try resolve attribution of: {}", phoneNo);
         if (phoneNo == null) {
             log.debug("phoneNo is null");
@@ -60,10 +60,10 @@ public class SimpleLookupAlgorithmImpl implements LookupAlgorithm {
             int infoStart = byteBuffer.getInt();
             byte ispMark = byteBuffer.get();
             if (phonePrefix == attributionIdentity) {
-                Optional<ISP> isp = ISP.of(ispMark);
+                ISP isp = ISP.of(ispMark).orElse(ISP.UNKNOWN);
                 byteBuffer.position(infoStart);
+                //noinspection StatementWithEmptyBody
                 while ((byteBuffer.get()) != 0) {
-                    // just
                 }
                 int infoEnd = byteBuffer.position() - 1;
                 byteBuffer.position(infoStart);
@@ -78,7 +78,7 @@ public class SimpleLookupAlgorithmImpl implements LookupAlgorithm {
                         .zipCode(split[2])
                         .areaCode(split[3])
                         .build();
-                return Optional.of(new PhoneNumberInfo(phoneNo, build, isp.get()));
+                return Optional.of(new PhoneNumberInfo(phoneNo, build, isp));
             }
         }
         return Optional.empty();
