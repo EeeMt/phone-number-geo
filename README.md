@@ -4,11 +4,11 @@
 
 ## 数据源
 
-数据源`dat`文件来自(xluohome/phonedata)[https://github.com/xluohome/phonedata]
+数据源`dat`文件来自[xluohome/phonedata](https://github.com/xluohome/phonedata)
 
 ## 对比**libphonenumber**
-对比(libphonenumber)[https://github.com/google/libphonenumber], `libphonenumber`有更多功能, 包括验证号码格式, 格式化, 时区等, 
-但基于(xluohome/phonedata)[https://github.com/xluohome/phonedata]提供的`dat`数据库能囊括包含虚拟运营商号段的更多号段.  
+对比[libphonenumber](https://github.com/google/libphonenumber), `libphonenumber`有更多功能, 包括验证号码格式, 格式化, 时区等, 
+但基于[xluohome/phonedata](https://github.com/xluohome/phonedata)提供的`dat`数据库能囊括包含虚拟运营商号段的更多号段.  
 
 至于速度, 未做比较, 但本仓库实现已足够快, 选择时建议更多权衡易用性, 功能和数据覆盖范围.
 
@@ -29,8 +29,8 @@ BenchmarkRunner.sequenceLookup             avgt    5  1504604.426 ± 25029.623  
 也可自行实现算法, 实现`me.ihxq.projects.pna.algorithm.LookupAlgorithm`即可.
 
 ## 感谢
-- 感谢(xluohome/phonedata)[https://github.com/xluohome/phonedata]共享的数据库
-- 也参考了@fengjiajie 的java实现(fengjiajie/phone-number-geo){https://github.com/fengjiajie/phone-number-geo]
+- 感谢[xluohome/phonedata](https://github.com/xluohome/phonedata)共享的数据库
+- 也参考了@fengjiajie 的java实现[fengjiajie/phone-number-geo](https://github.com/fengjiajie/phone-number-geo)
 
 
 ## Todo
