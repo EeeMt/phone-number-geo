@@ -1,12 +1,28 @@
 # 手机归属地查询
 
 ## 简介
+根据手机号前**7**位确定手机号运营商即归属地
 
 ## 数据源
 
-数据源`dat`文件来自[xluohome/phonedata](https://github.com/xluohome/phonedata)
+数据源`dat`文件来自[xluohome/phonedata](https://github.com/xluohome/phonedata)提供的数据库, 会不定时同步更新数据库
 
-## 对比**libphonenumber**
+## maven
+```xml
+<dependency>
+    <groupId>me.ihxq.projects</groupId>
+    <artifactId>phone-number-geo</artifactId>
+    <version>1.0.0-201911</version>
+</dependency>
+```
+版本号解释:
+`1.0.0-201911`
+ ╰┈∨┈╯ ╰┈∨┈╯
+   |     |
+   │     ╰┈┈┈┈┈┈┈┈ 数据库版本(年月)
+   ╰┈┈┈┈┈┈┈┈┈┈┈┈┈┈ Api版本
+
+## 对比`libphonenumber`
 对比[libphonenumber](https://github.com/google/libphonenumber), `libphonenumber`有更多功能, 包括验证号码格式, 格式化, 时区等, 
 但基于[xluohome/phonedata](https://github.com/xluohome/phonedata)提供的`dat`数据库能囊括包含虚拟运营商号段的更多号段.  
 
