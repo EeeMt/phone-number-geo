@@ -113,7 +113,7 @@ public class AnotherBinarySearchAlgorithmImpl implements LookupAlgorithm {
                 bytes = Arrays.copyOf(bytes, resultBufferSize);
             }
         }
-        String oriString = new String(bytes);
+        String oriString = new String(bytes, 0, i);
         String[] split = oriString.split("\\|");
         Attribution build = Attribution.builder()
                 .province(split[0])
