@@ -2,7 +2,7 @@ package me.ihxq.projects.pna;
 
 import lombok.extern.slf4j.Slf4j;
 import me.ihxq.projects.pna.algorithm.BinarySearchAlgorithmImpl;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runner.Description;
 
 import java.io.IOException;

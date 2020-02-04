@@ -6,21 +6,13 @@
 
     <groupId>me.ihxq.projects</groupId>
     <artifactId>phone-number-attribution</artifactId>
-    <version>0.0.1-beta</version>
+    <version>1.0.0-201911</version>
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>8</source>
-                    <target>8</target>
-                </configuration>
-            </plugin>
-        </plugins>
     </build>
     <properties>
-        <jmh.version>1.23</jmh.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
     </properties>
 
     <dependencies>
@@ -28,13 +20,16 @@
         <dependency>
             <groupId>org.openjdk.jmh</groupId>
             <artifactId>jmh-core</artifactId>
-            <version>${jmh.version}</version>
+            <scope>test</scope>
+            <version>1.23</version>
         </dependency>
         <dependency>
             <groupId>org.openjdk.jmh</groupId>
             <artifactId>jmh-generator-annprocess</artifactId>
-            <version>${jmh.version}</version>
+            <scope>test</scope>
+            <version>1.23</version>
         </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -46,21 +41,10 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>RELEASE</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>RELEASE</version>
+            <version>4.13</version>
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>28.1-jre</version>
-        </dependency>
 
         <dependency>
             <groupId>org.slf4j</groupId>
