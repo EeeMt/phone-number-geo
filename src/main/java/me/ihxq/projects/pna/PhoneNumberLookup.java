@@ -1,11 +1,9 @@
 package me.ihxq.projects.pna;
 
 import lombok.extern.slf4j.Slf4j;
+import me.ihxq.projects.pna.algorithm.BinarySearchAlgorithmImpl;
 import me.ihxq.projects.pna.algorithm.LookupAlgorithm;
-import me.ihxq.projects.pna.algorithm.SimpleLookupAlgorithmImpl;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -21,19 +19,24 @@ public class PhoneNumberLookup {
     private static final String PHONE_NUMBER_GEO_PHONE_DAT = "phone.dat";
     private LookupAlgorithm lookupAlgorithm;
 
-    private void init() throws IOException, URISyntaxException {
-        URL url = ClassLoader.getSystemResource(PHONE_NUMBER_GEO_PHONE_DAT);
-        Path path = Paths.get(url.toURI());
-        byte[] allBytes = Files.readAllBytes(path);
-        lookupAlgorithm.loadData(allBytes);
+    private void init() {
+        try {
+            URL url = ClassLoader.getSystemResource(PHONE_NUMBER_GEO_PHONE_DAT);
+            Path path = Paths.get(url.toURI());
+            byte[] allBytes = Files.readAllBytes(path);
+            lookupAlgorithm.loadData(allBytes);
+        } catch (Exception e) {
+            log.error("failed to init PhoneNumberLookUp");
+            throw new RuntimeException(e);
+        }
     }
 
-    public PhoneNumberLookup() throws IOException, URISyntaxException {
-        lookupAlgorithm = new SimpleLookupAlgorithmImpl();
+    public PhoneNumberLookup() {
+        lookupAlgorithm = new BinarySearchAlgorithmImpl();
         init();
     }
 
-    public PhoneNumberLookup(LookupAlgorithm lookupAlgorithm) throws IOException, URISyntaxException {
+    public PhoneNumberLookup(LookupAlgorithm lookupAlgorithm) {
         this.lookupAlgorithm = lookupAlgorithm;
         init();
     }
