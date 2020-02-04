@@ -16,16 +16,8 @@
 </dependency>
 ```
 版本号解释:  
+![](./version_explain.png)
 
-`1.0.0-201911`  
-
- ╰┈∨┈╯ ╰┈∨┈╯  
- 
-   |     |  
-   
-   │     ╰┈┈┈┈┈┈┈┈ 数据库版本(年月)  
-   
-   ╰┈┈┈┈┈┈┈┈┈┈┈┈┈┈ Api版本  
 
 ## 对比`libphonenumber`
 对比[libphonenumber](https://github.com/google/libphonenumber), `libphonenumber`有更多功能, 包括验证号码格式, 格式化, 时区等, 
