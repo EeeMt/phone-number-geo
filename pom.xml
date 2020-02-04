@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>me.ihxq.projects</groupId>
-    <artifactId>phone-number-attribution</artifactId>
+    <artifactId>phone-number-geo</artifactId>
     <version>1.0.0-201911</version>
     <build>
     </build>
