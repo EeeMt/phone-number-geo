@@ -35,9 +35,10 @@ BenchmarkRunner.anotherBinarySearchLookup  avgt    5      393.928 ±     8.368  
 BenchmarkRunner.binarySearchLookup         avgt    5      391.755 ±     3.839  ns/op
 BenchmarkRunner.sequenceLookup             avgt    5  1504604.426 ± 25029.623  ns/op
 ```
-跑分源码位于`me.ihxq.projects.pna.benchmark.BenchmarkRunner`, 基于`JMH`
+性能测试源码位于`me.ihxq.projects.pna.benchmark.BenchmarkRunner`, 基于`JMH`
 
-二分查找的平均速度为`391ns/op`, 
+二分查找的平均速度为`391ns/op`, 测试结果因测试机器而异.  
+
 默认使用的也是`me.ihxq.projects.pna.algorithm.BinarySearchAlgorithmImpl`, 
 可以通过`new PhoneNumberLookup(new AlgorithmYouLike());`使用其他算法;  
 
