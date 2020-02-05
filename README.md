@@ -7,6 +7,7 @@
 
 数据源`dat`文件来自[xluohome/phonedata](https://github.com/xluohome/phonedata)提供的数据库, 会不定时同步更新数据库
 
+当前数据源版本: `201911`
 ## maven
 ```xml
 <dependency>
