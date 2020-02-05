@@ -127,6 +127,9 @@ public class BinarySearchAlgorithmImpl implements LookupAlgorithm {
 
     private Attribution parse(String ori) {
         String[] split = ori.split("\\|");
+        if (split.length < 4) {
+            throw new IllegalStateException("content format error");
+        }
         return Attribution.builder()
                 .province(split[0])
                 .city(split[1])
