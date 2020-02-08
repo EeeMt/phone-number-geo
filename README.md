@@ -24,7 +24,7 @@
 class Demo1{
     public static void main(String[] args){
         PhoneNumberLookup phoneNumberLookup = new PhoneNumberLookup();
-        PhoneNumberInfo found = phoneNumberLookup.lookup("1879889xxxx").orElseThrow(RuntimeException::new);
+        PhoneNumberInfo found = phoneNumberLookup.lookup("18798896741").orElseThrow(RuntimeException::new);
     }
 }
 ```
