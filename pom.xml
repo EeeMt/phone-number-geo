@@ -105,9 +105,19 @@
                 <groupId>org.eluder.coveralls</groupId>
                 <artifactId>coveralls-maven-plugin</artifactId>
                 <version>4.3.0</version>
-                <configuration>
-                    <repoToken>qE3RndxjTcyFfBZU5OP4YmkU5gUHfQ8TR</repoToken>
-                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.5</version>
+                <executions>
+                    <execution>
+                        <id>default-prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -134,7 +144,8 @@
                 <configuration>
                     <junitArtifactName>junit:junit</junitArtifactName>
                     <encoding>UTF-8</encoding>
-                    <argLine>-Dfile.encoding=UTF-8</argLine>
+                    <!--suppress MavenModelInspection -->
+                    <argLine>${argLine} -Dfile.encoding=UTF-8</argLine>
                 </configuration>
             </plugin>
         </plugins>
