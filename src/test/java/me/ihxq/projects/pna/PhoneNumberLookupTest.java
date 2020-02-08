@@ -69,7 +69,7 @@ public class PhoneNumberLookupTest {
         Stream.generate(() -> {
             long phoneNumber = (long) (ThreadLocalRandom.current().nextDouble(1D, 2D) * 1000_000_000_0L);
             return String.valueOf(phoneNumber);
-        }).limit(20_000)
+        }).limit(2_000)
                 .parallel()
                 .forEach(v -> phoneNumberLookup.lookup(v).isPresent());
     }
