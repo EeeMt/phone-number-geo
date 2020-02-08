@@ -1,7 +1,7 @@
 # 手机归属地查询
 
 ## 简介
-根据手机号前**7**位确定手机号运营商即归属地
+根据手机号前**7**位确定手机号运营商即归属地, 支持包括虚拟运营商的中国大陆手机号查询.
 
 ## 数据源
 
@@ -19,6 +19,40 @@
 版本号解释:  
 ![](./version_explain.png)
 
+## 示例
+```java
+class Demo1{
+    public static void main(String[] args){
+        PhoneNumberLookup phoneNumberLookup = new PhoneNumberLookup();
+        PhoneNumberInfo found = phoneNumberLookup.lookup("1879889xxxx").orElseThrow(RuntimeException::new);
+    }
+}
+```
+```java
+class Demo2{
+    public static void main(String[] args){
+        PhoneNumberLookup phoneNumberLookup = new PhoneNumberLookup();
+        String province = phoneNumberLookup.lookup("130898976761")
+                        .map(PhoneNumberInfo::getAttribution)
+                        .map(Attribution::getProvince)
+                        .orElse("未知");
+    }
+}
+```
+```java
+class Demo3{
+    public static void main(String[] args){
+        PhoneNumberLookup phoneNumberLookup = new PhoneNumberLookup();
+        PhoneNumberInfo found = phoneNumberLookup.lookup("18798896741").orElseThrow(RuntimeException::new);
+        found.getNumber(); // 18798896741
+        found.getAttribution().getProvince(); // 贵州
+        found.getAttribution().getCity(); // 贵阳
+        found.getAttribution().getZipCode(); // 550000
+        found.getAttribution().getAreaCode(); // 0851
+        found.getIsp(); // ISP.CHINA_MOBILE
+    }
+}
+```
 
 ## 对比`libphonenumber`
 对比[libphonenumber](https://github.com/google/libphonenumber), `libphonenumber`有更多功能, 包括验证号码格式, 格式化, 时区等, 
