@@ -10,6 +10,8 @@ import java.nio.ByteOrder;
 import java.util.Optional;
 
 /**
+ * 二分查找算子
+ *
  * @author xq.h
  * 2019/10/19 00:12
  **/

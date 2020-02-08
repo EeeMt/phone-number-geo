@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
+ * 运营商
+ *
  * @author xq.h
  * on 2019/10/18 20:57
  **/
@@ -19,6 +21,9 @@ public enum ISP {
     CHINA_MOBILE_VIRTUAL("中国移动虚拟运营商", 6),
     UNKNOWN("未知", -1),
     ;
+    /**
+     * 中文名
+     */
     @Getter
     private final String cnName;
     private final int value;
@@ -29,9 +34,7 @@ public enum ISP {
     }
 
     public static Optional<ISP> of(int value) {
-        // todo
-        ISP[] values = values();
-        return Arrays.stream(values)
+        return Arrays.stream(values())
                 .filter(v -> v.value == value)
                 .findAny();
     }

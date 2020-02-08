@@ -84,4 +84,4 @@ BenchmarkRunner.sequenceLookup             avgt    5  1504604.426 ± 25029.623  
 
 
 ## Todo
-- [ ] 发布到`maven`仓库
+- [x] 发布到`maven`中央仓库

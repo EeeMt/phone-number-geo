@@ -11,6 +11,8 @@ import java.nio.file.Paths;
 import java.util.Optional;
 
 /**
+ * 电话号码归属信息查询
+ *
  * @author xq.h
  * 2019/10/18 21:25
  **/
@@ -31,16 +33,25 @@ public class PhoneNumberLookup {
         }
     }
 
+    /**
+     * 使用默认算子
+     */
     public PhoneNumberLookup() {
         lookupAlgorithm = new BinarySearchAlgorithmImpl();
         init();
     }
 
+    /**
+     * @param lookupAlgorithm 算子
+     */
     public PhoneNumberLookup(LookupAlgorithm lookupAlgorithm) {
         this.lookupAlgorithm = lookupAlgorithm;
         init();
     }
 
+    /**
+     * @param phoneNumber 电话号码, 11位, 或前7位
+     */
     public Optional<PhoneNumberInfo> lookup(String phoneNumber) {
         return lookupAlgorithm.lookup(phoneNumber);
     }
