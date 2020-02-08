@@ -11,6 +11,15 @@
     <name>phone-number-geo</name>
     <url>https://github.com/EeeMt/phone-number-geo</url>
     <description>find geo info for phone numbers which belongs to china.</description>
+    <developers>
+        <developer>
+            <id>major</id>
+            <name>eeemt</name>
+            <email>hxq@live.com</email>
+            <url>http://www.ihxq.me</url>
+            <timezone>+8</timezone>
+        </developer>
+    </developers>
     <licenses>
         <license>
             <name>MIT License</name>
