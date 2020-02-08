@@ -1,6 +1,6 @@
 # 手机归属地查询
 
-[![Maven Central](https://img.shields.io/maven-central/v/me.ihxq.projects/phone-number-geo?color=%2331B404&label=maven)](https://maven-badges.herokuapp.com/maven-central/me.ihxq.projects/phone-number-geo)
+[![Maven Central](https://img.shields.io/maven-central/v/me.ihxq.projects/phone-number-geo?color=FE9A2E&label=maven)](https://maven-badges.herokuapp.com/maven-central/me.ihxq.projects/phone-number-geo)
 [![Build Status](https://travis-ci.com/EeeMt/phone-number-geo.svg?branch=master)](https://travis-ci.com/EeeMt/phone-number-geo)
 [![javadoc](https://javadoc.io/badge2/me.ihxq.projects/phone-number-geo/javadoc.svg)](https://javadoc.io/doc/me.ihxq.projects/phone-number-geo)
 [![Coverage Status](https://coveralls.io/repos/github/EeeMt/phone-number-geo/badge.svg?branch=master)](https://coveralls.io/github/EeeMt/phone-number-geo?branch=master)
