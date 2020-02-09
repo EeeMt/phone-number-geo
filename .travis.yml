@@ -4,5 +4,6 @@ cache:
     - $HOME/.m2
 jdk:
   - openjdk8
-after_success:
-  - mvn clean test jacoco:report coveralls:report -DrepoToken=${repoToken}
+script:
+  - mvn clean install -B -V
+  - mvn test jacoco:report coveralls:report -DrepoToken=${repoToken} -B
