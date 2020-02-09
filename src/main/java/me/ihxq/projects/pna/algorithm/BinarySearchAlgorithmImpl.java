@@ -63,7 +63,6 @@ public class BinarySearchAlgorithmImpl implements LookupAlgorithm {
     public Optional<PhoneNumberInfo> lookup(String phoneNumber) {
         log.trace("try to resolve attribution of phone number: {}", phoneNumber);
         ByteBuffer byteBuffer = originalByteBuffer.asReadOnlyBuffer().order(ByteOrder.LITTLE_ENDIAN);
-        //ByteBuffer byteBuffer = originalByteBuffer.asReadOnlyBuffer().order(ByteOrder.LITTLE_ENDIAN);
         if (isInvalidPhoneNumber(phoneNumber)) {
             return Optional.empty();
         }

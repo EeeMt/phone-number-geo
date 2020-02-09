@@ -47,6 +47,7 @@ public class PhoneNumberLookupAlgorithmTest {
         Assert.assertEquals(found.getAttribution().getZipCode(), "550000");
         Assert.assertEquals(found.getAttribution().getAreaCode(), "0851");
         Assert.assertEquals(found.getIsp(), ISP.CHINA_MOBILE);
+        Assert.assertNotNull(found.getIsp().getCnName());
     }
 
     @Test
