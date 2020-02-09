@@ -31,6 +31,7 @@ public class PhoneNumberLookupAlgorithmTest {
     @Test
     public void invalid() {
         PhoneNumberLookup phoneNumberLookup = new PhoneNumberLookup(algorithm);
+        Assert.assertNull(phoneNumberLookup.lookup(null).orElse(null));
         Assert.assertNull(phoneNumberLookup.lookup("000").orElse(null));
         Assert.assertNull(phoneNumberLookup.lookup("-1").orElse(null));
         Assert.assertNull(phoneNumberLookup.lookup("130898976761").orElse(null));
@@ -73,6 +74,24 @@ public class PhoneNumberLookupAlgorithmTest {
         }).limit(2_000)
                 .parallel()
                 .forEach(v -> phoneNumberLookup.lookup(v).isPresent());
+    }
+
+    @Test
+    public void lookupFirst() {
+        PhoneNumberLookup phoneNumberLookup = new PhoneNumberLookup(algorithm);
+        Assert.assertNotNull(phoneNumberLookup.lookup("13000000000"));
+    }
+
+    @Test
+    public void lookupLast() {
+        PhoneNumberLookup phoneNumberLookup = new PhoneNumberLookup(algorithm);
+        Assert.assertNotNull(phoneNumberLookup.lookup("19999790000"));
+    }
+
+    @Test
+    public void lookupEqual() {
+        PhoneNumberLookup phoneNumberLookup = new PhoneNumberLookup(algorithm);
+        Assert.assertEquals(phoneNumberLookup.lookup("19999790000"), phoneNumberLookup.lookup("19999790000"));
     }
 
     @Parameterized.Parameters

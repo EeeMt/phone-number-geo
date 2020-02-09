@@ -19,21 +19,5 @@ public class PhoneNumberLookupTest {
         Assert.assertNull(phoneNumberLookup.lookup("130898976761").orElse(null));
     }
 
-    @Test
-    public void lookupFirst() {
-        PhoneNumberLookup phoneNumberLookup = new PhoneNumberLookup();
-        Assert.assertNotNull(phoneNumberLookup.lookup("13000000000"));
-    }
 
-    @Test
-    public void lookupLast() {
-        PhoneNumberLookup phoneNumberLookup = new PhoneNumberLookup();
-        Assert.assertNotNull(phoneNumberLookup.lookup("19999790000"));
-    }
-
-    @Test
-    public void lookupEqual() {
-        PhoneNumberLookup phoneNumberLookup = new PhoneNumberLookup();
-        Assert.assertEquals(phoneNumberLookup.lookup("19999790000"), phoneNumberLookup.lookup("19999790000"));
-    }
 }
