@@ -70,16 +70,17 @@ class Demo3{
 
 工程里已内置三种算法, 跑分情况如下:
 ```
-Benchmark                                  Mode  Cnt        Score       Error  Units
-BenchmarkRunner.anotherBinarySearchLookup  avgt    5      393.928 ±     8.368  ns/op
-BenchmarkRunner.binarySearchLookup         avgt    5      391.755 ±     3.839  ns/op
-BenchmarkRunner.sequenceLookup             avgt    5  1504604.426 ± 25029.623  ns/op
+Benchmark                                   Mode  Cnt        Score       Error  Units
+BenchmarkRunner.anotherBinarySearchLookup   avgt    5      390.483 ±     3.544  ns/op
+BenchmarkRunner.binarySearchLookup          avgt    5      386.357 ±     3.739  ns/op
+BenchmarkRunner.prospectBinarySearchLookup  avgt    5      304.622 ±     1.899  ns/op
+BenchmarkRunner.sequenceLookup              avgt    5  1555265.227 ± 48814.379  ns/op
 ```
 性能测试源码位于`me.ihxq.projects.pna.benchmark.BenchmarkRunner`, 基于`JMH`
 
-二分查找的平均速度为`391ns/op`, 测试结果因测试机器而异.  
+测试样本在每次启动时生成, 供所有算子测试使用, 所以每次测试结果有差异, 结果可用于纵向比较, 不适用与横向比较.
 
-默认使用的也是`me.ihxq.projects.pna.algorithm.BinarySearchAlgorithmImpl`, 
+默认使用的是`me.ihxq.projects.pna.algorithm.BinarySearchAlgorithmImpl`, 
 可以通过`new PhoneNumberLookup(new AlgorithmYouLike());`使用其他算法;  
 
 也可自行实现算法, 实现`me.ihxq.projects.pna.algorithm.LookupAlgorithm`即可.

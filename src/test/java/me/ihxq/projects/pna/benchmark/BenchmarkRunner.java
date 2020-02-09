@@ -3,6 +3,7 @@ package me.ihxq.projects.pna.benchmark;
 import me.ihxq.projects.pna.PhoneNumberLookup;
 import me.ihxq.projects.pna.algorithm.AnotherBinarySearchAlgorithmImpl;
 import me.ihxq.projects.pna.algorithm.BinarySearchAlgorithmImpl;
+import me.ihxq.projects.pna.algorithm.ProspectBinarySearchAlgorithmImpl;
 import me.ihxq.projects.pna.algorithm.SequenceLookupAlgorithmImpl;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Mode;
@@ -69,6 +70,7 @@ public class BenchmarkRunner {
     private static PhoneNumberLookup binarySearchLookup = new PhoneNumberLookup(new BinarySearchAlgorithmImpl());
     private static PhoneNumberLookup anotherBinarySearchLookup = new PhoneNumberLookup(new AnotherBinarySearchAlgorithmImpl());
     private static PhoneNumberLookup sequenceLookup = new PhoneNumberLookup(new SequenceLookupAlgorithmImpl());
+    private static PhoneNumberLookup prospectBinarySearchLookup = new PhoneNumberLookup(new ProspectBinarySearchAlgorithmImpl());
 
     @Benchmark
     public void binarySearchLookup(PhoneNumbers phoneNumbers) {
@@ -83,5 +85,10 @@ public class BenchmarkRunner {
     @Benchmark
     public void sequenceLookup(PhoneNumbers phoneNumbers) {
         sequenceLookup.lookup(phoneNumbers.getPhoneNumber());
+    }
+
+    @Benchmark
+    public void prospectBinarySearchLookup(PhoneNumbers phoneNumbers) {
+        prospectBinarySearchLookup.lookup(phoneNumbers.getPhoneNumber());
     }
 }

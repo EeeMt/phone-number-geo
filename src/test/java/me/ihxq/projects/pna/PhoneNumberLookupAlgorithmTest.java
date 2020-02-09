@@ -1,10 +1,7 @@
 package me.ihxq.projects.pna;
 
 import lombok.extern.slf4j.Slf4j;
-import me.ihxq.projects.pna.algorithm.AnotherBinarySearchAlgorithmImpl;
-import me.ihxq.projects.pna.algorithm.BinarySearchAlgorithmImpl;
-import me.ihxq.projects.pna.algorithm.LookupAlgorithm;
-import me.ihxq.projects.pna.algorithm.SequenceLookupAlgorithmImpl;
+import me.ihxq.projects.pna.algorithm.*;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -98,6 +95,7 @@ public class PhoneNumberLookupAlgorithmTest {
     public static Collection<Object[]> instancesToTest() {
         return Arrays.asList(
                 new Object[]{new BinarySearchAlgorithmImpl()},
+                new Object[]{new ProspectBinarySearchAlgorithmImpl()},
                 new Object[]{new SequenceLookupAlgorithmImpl()},
                 new Object[]{new AnotherBinarySearchAlgorithmImpl()}
         );

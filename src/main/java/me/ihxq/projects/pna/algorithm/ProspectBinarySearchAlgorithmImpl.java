@@ -17,7 +17,7 @@ import java.util.Optional;
  **/
 @Slf4j
 @SuppressWarnings("DuplicatedCode")
-public class BinarySearchAlgorithmImpl implements LookupAlgorithm {
+public class ProspectBinarySearchAlgorithmImpl implements LookupAlgorithm {
     private ByteBuffer originalByteBuffer;
     private int indicesStartOffset;
     private int indicesEndOffset;
@@ -76,7 +76,9 @@ public class BinarySearchAlgorithmImpl implements LookupAlgorithm {
         }
         int left = indicesStartOffset;
         int right = indicesEndOffset;
-        int mid = (left + right) / 2;
+        int attributionIdentityPrefix = attributionIdentity / 100_000;
+        int mid = indicesStartOffset + ((indicesEndOffset - indicesStartOffset) / 7 * (attributionIdentityPrefix - 13));
+        mid = strictMid(mid);
         while (mid >= left && mid <= right) {
             if (mid == right) {
                 return Optional.empty();
