@@ -19,9 +19,12 @@
 <dependency>
     <groupId>me.ihxq.projects</groupId>
     <artifactId>phone-number-geo</artifactId>
-    <version>1.0.0-201911</version>
+    <version>x.x.x-xxxxxx</version>
 </dependency>
 ```
+[这里](https://maven-badges.herokuapp.com/maven-central/me.ihxq.projects/phone-number-geo)获取最新版号.  
+
+
 版本号解释:  
 ![](./version_explain.png)
 
