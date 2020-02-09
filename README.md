@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.com/EeeMt/phone-number-geo.svg?branch=master)](https://travis-ci.com/EeeMt/phone-number-geo)
 [![javadoc](https://javadoc.io/badge2/me.ihxq.projects/phone-number-geo/javadoc.svg)](https://javadoc.io/doc/me.ihxq.projects/phone-number-geo)
 [![Coverage Status](https://coveralls.io/repos/github/EeeMt/phone-number-geo/badge.svg?branch=master)](https://coveralls.io/github/EeeMt/phone-number-geo?branch=master)
-
+![GitHub](https://img.shields.io/github/license/eeemt/phone-number-geo)
 
 ## 简介
 根据手机号前**7**位确定手机号运营商即归属地, 支持包括虚拟运营商的中国大陆手机号查询.
