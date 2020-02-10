@@ -81,7 +81,7 @@ BenchmarkRunner.sequenceLookup              avgt    5  1555265.227 ± 48814.379 
 ```
 性能测试源码位于`me.ihxq.projects.pna.benchmark.BenchmarkRunner`, 基于`JMH`
 
-测试样本在每次启动时生成, 供所有算子测试使用, 所以每次测试结果有差异, 结果可用于纵向比较, 不适用与横向比较.
+测试样本在每次启动时生成, 供所有算子测试使用, 所以每次测试结果有差异, 结果可用于纵向比较, 不适用于横向比较.
 
 默认使用的是`me.ihxq.projects.pna.algorithm.BinarySearchAlgorithmImpl`, 
 可以通过`new PhoneNumberLookup(new AlgorithmYouLike());`使用其他算法;  
