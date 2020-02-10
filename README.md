@@ -71,7 +71,7 @@ class Demo3{
 
 ## Benchmark
 
-工程里已内置三种算法, 跑分情况如下:
+工程里已内置四种算法, 跑分情况如下:
 ```
 Benchmark                                   Mode  Cnt        Score       Error  Units
 BenchmarkRunner.anotherBinarySearchLookup   avgt    5      390.483 ±     3.544  ns/op
