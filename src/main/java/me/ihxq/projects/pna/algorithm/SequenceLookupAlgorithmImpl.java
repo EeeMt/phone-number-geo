@@ -22,14 +22,12 @@ public class SequenceLookupAlgorithmImpl implements LookupAlgorithm {
     public void loadData(byte[] data) {
         originalByteBuffer = ByteBuffer.wrap(data).asReadOnlyBuffer();
         originalByteBuffer.order(ByteOrder.LITTLE_ENDIAN);
+        //noinspection unused
         int dataVersion = originalByteBuffer.getInt();
         indicesOffset = originalByteBuffer.getInt(4);
     }
 
-    /**
-     * @param phoneNo length: 7 to 11
-     * @return
-     */
+    @SuppressWarnings("DuplicatedCode")
     @Override
     public Optional<PhoneNumberInfo> lookup(String phoneNo) {
         ByteBuffer byteBuffer = originalByteBuffer.asReadOnlyBuffer().order(ByteOrder.LITTLE_ENDIAN);

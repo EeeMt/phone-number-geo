@@ -24,11 +24,13 @@ public class AnotherBinarySearchAlgorithmImpl implements LookupAlgorithm {
     public void loadData(byte[] data) {
         originalByteBuffer = ByteBuffer.wrap(data).asReadOnlyBuffer();
         originalByteBuffer.order(ByteOrder.LITTLE_ENDIAN);
+        //noinspection unused
         int dataVersion = originalByteBuffer.getInt();
         indicesStartOffset = originalByteBuffer.getInt(4);
         indicesEndOffset = originalByteBuffer.limit();
     }
 
+    @SuppressWarnings("DuplicatedCode")
     @Override
     public Optional<PhoneNumberInfo> lookup(String phoneNo) {
         log.trace("try to resolve attribution of: {}", phoneNo);
@@ -96,6 +98,7 @@ public class AnotherBinarySearchAlgorithmImpl implements LookupAlgorithm {
         }
 
         byteBuffer.position(mid);
+        //noinspection unused
         int prefix = byteBuffer.getInt();
         int infoStartIndex = byteBuffer.getInt();
         byte ispMark = byteBuffer.get();
@@ -121,12 +124,12 @@ public class AnotherBinarySearchAlgorithmImpl implements LookupAlgorithm {
                 .zipCode(split[2])
                 .areaCode(split[3])
                 .build();
-        return Optional.of(new PhoneNumberInfo(phoneNo, build, isp.get()));
+        return Optional.of(new PhoneNumberInfo(phoneNo, build, isp.orElse(ISP.UNKNOWN)));
     }
 
     private int compare(int position, int key, ByteBuffer byteBuffer) {
         byteBuffer.position(position);
-        int phonePrefix = 0;
+        int phonePrefix;
         try {
             phonePrefix = byteBuffer.getInt();
         } catch (Exception e) {

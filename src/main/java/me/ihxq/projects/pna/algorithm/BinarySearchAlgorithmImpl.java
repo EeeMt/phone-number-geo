@@ -27,6 +27,7 @@ public class BinarySearchAlgorithmImpl implements LookupAlgorithm {
         originalByteBuffer = ByteBuffer.wrap(data)
                 .asReadOnlyBuffer()
                 .order(ByteOrder.LITTLE_ENDIAN);
+        //noinspection unused
         int dataVersion = originalByteBuffer.getInt(); // dataVersion not valid, don't know why
         indicesStartOffset = originalByteBuffer.getInt(4);
         indicesEndOffset = originalByteBuffer.capacity();
@@ -103,6 +104,7 @@ public class BinarySearchAlgorithmImpl implements LookupAlgorithm {
 
     private Optional<PhoneNumberInfo> extract(String phoneNumber, int indexStart, ByteBuffer byteBuffer) {
         byteBuffer.position(indexStart);
+        //noinspection unused
         int prefix = byteBuffer.getInt(); // it is necessary
         int infoStartIndex = byteBuffer.getInt();
         byte ispMark = byteBuffer.get();

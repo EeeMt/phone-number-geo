@@ -4,10 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import me.ihxq.projects.pna.algorithm.BinarySearchAlgorithmImpl;
 import me.ihxq.projects.pna.algorithm.LookupAlgorithm;
 
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.InputStream;
 import java.util.Optional;
 
 /**
@@ -23,12 +20,14 @@ public class PhoneNumberLookup {
 
     private void init() {
         try {
-            URL url = ClassLoader.getSystemResource(PHONE_NUMBER_GEO_PHONE_DAT);
-            Path path = Paths.get(url.toURI());
-            byte[] allBytes = Files.readAllBytes(path);
+            InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(PHONE_NUMBER_GEO_PHONE_DAT);
+            assert inputStream != null;
+            byte[] allBytes = new byte[inputStream.available()];
+            //noinspection unused
+            int read = inputStream.read(allBytes);
             lookupAlgorithm.loadData(allBytes);
         } catch (Exception e) {
-            log.error("failed to init PhoneNumberLookUp");
+            log.error("failed to init PhoneNumberLookUp", e);
             throw new RuntimeException(e);
         }
     }
@@ -51,6 +50,7 @@ public class PhoneNumberLookup {
 
     /**
      * @param phoneNumber 电话号码, 11位, 或前7位
+     * @return 电话号码归属信息
      */
     public Optional<PhoneNumberInfo> lookup(String phoneNumber) {
         return lookupAlgorithm.lookup(phoneNumber);
