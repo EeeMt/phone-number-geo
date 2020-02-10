@@ -7,7 +7,7 @@
 ![GitHub](https://img.shields.io/github/license/eeemt/phone-number-geo)
 
 ## 简介
-根据手机号前**7**位确定手机号运营商即归属地, 支持包括虚拟运营商的中国大陆手机号查询.
+根据手机号确定手机号运营商即归属地, 支持包括虚拟运营商的中国大陆手机号查询.
 
 ## 数据源
 
