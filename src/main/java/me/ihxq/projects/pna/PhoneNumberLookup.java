@@ -4,8 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import me.ihxq.projects.pna.algorithm.BinarySearchAlgorithmImpl;
 import me.ihxq.projects.pna.algorithm.LookupAlgorithm;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -17,7 +17,7 @@ import java.util.Optional;
  **/
 @Slf4j
 public class PhoneNumberLookup {
-    private static final String PHONE_NUMBER_GEO_PHONE_DAT = "/phone.dat";
+    private static final String PHONE_NUMBER_GEO_PHONE_DAT = "phone.dat";
     private LookupAlgorithm lookupAlgorithm;
     /**
      * 数据版本hash值, 版本:201911
@@ -26,7 +26,17 @@ public class PhoneNumberLookup {
 
     private void init() {
         try {
-            byte[] allBytes = Files.readAllBytes(Paths.get(this.getClass().getResource(PHONE_NUMBER_GEO_PHONE_DAT).toURI()));
+            InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(PHONE_NUMBER_GEO_PHONE_DAT);
+            assert inputStream != null;
+            byte[] allBytes;
+            try (final ByteArrayOutputStream output = new ByteArrayOutputStream()) {
+                int n;
+                byte[] buffer = new byte[1024 * 4];
+                while (-1 != (n = inputStream.read(buffer))) {
+                    output.write(buffer, 0, n);
+                }
+                allBytes = output.toByteArray();
+            }
             int hashCode = Arrays.hashCode(allBytes);
             if (hashCode != dataHash) {
                 throw new IllegalStateException("Hash of data not match, expect: " + dataHash + ", actually: " + hashCode);
