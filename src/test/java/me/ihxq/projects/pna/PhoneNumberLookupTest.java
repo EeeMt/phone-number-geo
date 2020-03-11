@@ -19,5 +19,11 @@ public class PhoneNumberLookupTest {
         Assert.assertNull(phoneNumberLookup.lookup("130898976761").orElse(null));
     }
 
+    @Test
+    public void test() {
+        PhoneNumberLookup phoneNumberLookup = new PhoneNumberLookup();
+        PhoneNumberInfo phoneNumberInfo = phoneNumberLookup.lookup("18385027575").get();
+        System.out.println(phoneNumberInfo);
+    }
 
 }

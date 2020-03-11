@@ -6,7 +6,7 @@
 
     <groupId>me.ihxq.projects</groupId>
     <artifactId>phone-number-geo</artifactId>
-    <version>1.0.3-201911</version>
+    <version>1.0.4-201911</version>
     <packaging>jar</packaging>
     <name>phone-number-geo</name>
     <url>https://github.com/EeeMt/phone-number-geo</url>
@@ -74,6 +74,11 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>2.0.0-alpha1</version>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
         </dependency>
 
     </dependencies>
@@ -144,7 +149,7 @@
                 <configuration>
                     <junitArtifactName>junit:junit</junitArtifactName>
                     <encoding>UTF-8</encoding>
-                    <!--suppress MavenModelInspection -->
+                    <!--suppress MavenModelInspection, UnresolvedMavenProperty -->
                     <argLine>${argLine} -Dfile.encoding=UTF-8</argLine>
                 </configuration>
             </plugin>
