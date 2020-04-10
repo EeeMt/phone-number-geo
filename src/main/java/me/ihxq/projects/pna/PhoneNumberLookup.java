@@ -18,11 +18,11 @@ import java.util.Optional;
 @Slf4j
 public class PhoneNumberLookup {
     private static final String PHONE_NUMBER_GEO_PHONE_DAT = "phone.dat";
-    private LookupAlgorithm lookupAlgorithm;
+    private final LookupAlgorithm lookupAlgorithm;
     /**
-     * 数据版本hash值, 版本:201911
+     * 数据版本hash值, 版本:202004
      */
-    private static final int dataHash = 316259817;
+    private static final int dataHash = 579405931;
 
     private void init() {
         try {
@@ -38,6 +38,7 @@ public class PhoneNumberLookup {
                 allBytes = output.toByteArray();
             }
             int hashCode = Arrays.hashCode(allBytes);
+            log.debug("loaded datasource, size: {}, hash: {}", allBytes.length, hashCode);
             if (hashCode != dataHash) {
                 throw new IllegalStateException("Hash of data not match, expect: " + dataHash + ", actually: " + hashCode);
             }
@@ -52,8 +53,7 @@ public class PhoneNumberLookup {
      * 使用默认算子
      */
     public PhoneNumberLookup() {
-        lookupAlgorithm = new BinarySearchAlgorithmImpl();
-        init();
+        this(new BinarySearchAlgorithmImpl());
     }
 
     /**
