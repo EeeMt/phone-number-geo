@@ -31,3 +31,8 @@
 ## 1.0.5-202004
 
 - 更新数据版本到2020.04
+
+## 1.0.6-202004
+
+- 修复一个bug https://github.com/EeeMt/phone-number-geo/issues/1
+- 优化单元测试

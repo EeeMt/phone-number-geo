@@ -78,6 +78,7 @@ public class BinarySearchAlgorithmImpl implements LookupAlgorithm {
         int left = indicesStartOffset;
         int right = indicesEndOffset;
         int mid = (left + right) / 2;
+        mid = strictMid(mid);
         while (mid >= left && mid <= right) {
             if (mid == right) {
                 return Optional.empty();

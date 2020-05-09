@@ -133,7 +133,6 @@ public class AnotherBinarySearchAlgorithmImpl implements LookupAlgorithm {
         try {
             phonePrefix = byteBuffer.getInt();
         } catch (Exception e) {
-            System.out.println("position: " + position);
             throw new RuntimeException(e);
         }
         return Integer.compare(phonePrefix, key);
