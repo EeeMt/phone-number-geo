@@ -84,14 +84,14 @@ public class PhoneNumberLookupAlgorithmTest {
     @MethodSource("algorithms")
     public void lookupFirst(LookupAlgorithm algorithm) {
         PhoneNumberLookup phoneNumberLookup = constructLookup(algorithm);
-        assertNotNull(phoneNumberLookup.lookup("13000000000"));
+        assertTrue(phoneNumberLookup.lookup("13000000000").isPresent());
     }
 
     @ParameterizedTest
     @MethodSource("algorithms")
     public void lookupLast(LookupAlgorithm algorithm) {
         PhoneNumberLookup phoneNumberLookup = constructLookup(algorithm);
-        assertNotNull(phoneNumberLookup.lookup("19999790000"));
+        assertTrue(phoneNumberLookup.lookup("19999790000").isPresent());
     }
 
     @ParameterizedTest

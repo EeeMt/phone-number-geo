@@ -36,14 +36,14 @@ public class ProspectBinarySearchAlgorithmImpl implements LookupAlgorithm {
     /**
      * 对齐
      */
-    private int strictMid(int mid) {
-        int remain = (mid - indicesStartOffset) % 9;
-        if (mid - indicesStartOffset < 9) {
-            return mid - remain;
+    private int alignPosition(int pos) {
+        int remain = (pos - indicesStartOffset) % 9;
+        if (pos - indicesStartOffset < 9) {
+            return pos - remain;
         } else if (remain != 0) {
-            return mid + 9 - remain;
+            return pos + 9 - remain;
         } else {
-            return mid;
+            return pos;
         }
     }
 
@@ -79,26 +79,25 @@ public class ProspectBinarySearchAlgorithmImpl implements LookupAlgorithm {
         int right = indicesEndOffset;
         int attributionIdentityPrefix = attributionIdentity / 100_000;
         int mid = indicesStartOffset + ((indicesEndOffset - indicesStartOffset) / 7 * (attributionIdentityPrefix - 13));
-        mid = strictMid(mid);
+        mid = alignPosition(mid);
         while (mid >= left && mid <= right) {
             if (mid == right) {
                 return Optional.empty();
             }
             int compare = compare(mid, attributionIdentity, byteBuffer);
-            if (mid == left) {
-                return Optional.empty();
-            }
 
             if (compare == 0) {
                 return extract(phoneNumber, mid, byteBuffer);
+            } else if (mid == left) {
+                return Optional.empty();
             } else if (compare > 0) {
                 int tempMid = (mid + left) / 2;
                 right = mid;
-                mid = strictMid(tempMid);
+                mid = alignPosition(tempMid);
             } else {
                 int tempMid = (mid + right) / 2;
                 left = mid;
-                mid = strictMid(tempMid);
+                mid = alignPosition(tempMid);
             }
         }
         return Optional.empty();

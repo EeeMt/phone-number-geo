@@ -30,6 +30,20 @@ public class AnotherBinarySearchAlgorithmImpl implements LookupAlgorithm {
         indicesEndOffset = originalByteBuffer.limit();
     }
 
+    /**
+     * 对齐
+     */
+    private int alignPosition(int pos) {
+        int remain = (pos - indicesStartOffset) % 9;
+        if (pos - indicesStartOffset < 9) {
+            return pos - remain;
+        } else if (remain != 0) {
+            return pos + 9 - remain;
+        } else {
+            return pos;
+        }
+    }
+
     @SuppressWarnings("DuplicatedCode")
     @Override
     public Optional<PhoneNumberInfo> lookup(String phoneNo) {
@@ -56,6 +70,7 @@ public class AnotherBinarySearchAlgorithmImpl implements LookupAlgorithm {
         int left = indicesStartOffset;
         int right = indicesEndOffset;
         int mid = (left + right) / 2;
+        mid = alignPosition(mid);
         while (mid >= left && mid <= right) {
             if (mid == right) {
                 return Optional.empty();
@@ -70,6 +85,7 @@ public class AnotherBinarySearchAlgorithmImpl implements LookupAlgorithm {
 
             if (compare > 0) {
                 int tempMid = (mid + left) / 2;
+                tempMid = alignPosition(tempMid);
                 right = mid;
                 int remain = (tempMid - indicesStartOffset) % 9;
                 if (tempMid - indicesStartOffset < 9) {
@@ -83,6 +99,7 @@ public class AnotherBinarySearchAlgorithmImpl implements LookupAlgorithm {
                 }
             } else {
                 int tempMid = (mid + right) / 2;
+                tempMid = alignPosition(tempMid);
                 left = mid;
                 int remain = (tempMid - indicesStartOffset) % 9;
                 if (tempMid - indicesStartOffset < 9) {

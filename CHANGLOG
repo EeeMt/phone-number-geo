@@ -36,3 +36,7 @@
 
 - 修复一个bug https://github.com/EeeMt/phone-number-geo/issues/1
 - 优化单元测试
+
+## 1.0.7-202004
+- 修复1300000xxxx无法查询的问题
+- 修复单元测试缺陷
