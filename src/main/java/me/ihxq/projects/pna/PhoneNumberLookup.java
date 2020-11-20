@@ -9,6 +9,8 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Optional;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * 电话号码归属信息查询
  *
@@ -26,13 +28,12 @@ public class PhoneNumberLookup {
 
     private void init() {
         try {
-            InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(PHONE_NUMBER_GEO_PHONE_DAT);
-            assert inputStream != null;
             byte[] allBytes;
-            try (final ByteArrayOutputStream output = new ByteArrayOutputStream()) {
+            try (final InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(PHONE_NUMBER_GEO_PHONE_DAT);
+                 final ByteArrayOutputStream output = new ByteArrayOutputStream()) {
                 int n;
                 byte[] buffer = new byte[1024 * 4];
-                while (-1 != (n = inputStream.read(buffer))) {
+                while (-1 != (n = requireNonNull(inputStream, "PhoneNumberLookup: Failed to get inputStream.").read(buffer))) {
                     output.write(buffer, 0, n);
                 }
                 allBytes = output.toByteArray();

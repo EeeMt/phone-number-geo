@@ -6,7 +6,7 @@
 
     <groupId>me.ihxq.projects</groupId>
     <artifactId>phone-number-geo</artifactId>
-    <version>1.0.7-202004</version>
+    <version>1.0.8-202004</version>
     <packaging>jar</packaging>
     <name>phone-number-geo</name>
     <url>https://github.com/EeeMt/phone-number-geo</url>
