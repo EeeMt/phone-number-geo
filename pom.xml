@@ -158,9 +158,9 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.6</version>
+                        <groupId>org.simplify4u.plugins</groupId>
+                        <artifactId>sign-maven-plugin</artifactId>
+                        <version>0.3.1</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -168,9 +168,6 @@
                                 <goals>
                                     <goal>sign</goal>
                                 </goals>
-                                <configuration>
-                                    <keyname>xiquan huang</keyname>
-                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
