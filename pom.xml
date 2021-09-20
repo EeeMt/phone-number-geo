@@ -6,7 +6,7 @@
 
     <groupId>me.ihxq.projects</groupId>
     <artifactId>phone-number-geo</artifactId>
-    <version>1.0.8-202106</version>
+    <version>1.0.8-202108</version>
     <packaging>jar</packaging>
     <name>phone-number-geo</name>
     <url>https://github.com/EeeMt/phone-number-geo</url>
@@ -44,25 +44,25 @@
             <groupId>org.openjdk.jmh</groupId>
             <artifactId>jmh-core</artifactId>
             <scope>test</scope>
-            <version>1.23</version>
+            <version>1.32</version>
         </dependency>
         <dependency>
             <groupId>org.openjdk.jmh</groupId>
             <artifactId>jmh-generator-annprocess</artifactId>
             <scope>test</scope>
-            <version>1.23</version>
+            <version>1.32</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.10</version>
+            <version>1.18.20</version>
             <optional>true</optional>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>5.5.2</version>
+            <version>5.8.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>

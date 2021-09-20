@@ -67,10 +67,10 @@ public class BenchmarkRunner {
     }
 
 
-    private static PhoneNumberLookup binarySearchLookup = new PhoneNumberLookup(new BinarySearchAlgorithmImpl());
-    private static PhoneNumberLookup anotherBinarySearchLookup = new PhoneNumberLookup(new AnotherBinarySearchAlgorithmImpl());
-    private static PhoneNumberLookup sequenceLookup = new PhoneNumberLookup(new SequenceLookupAlgorithmImpl());
-    private static PhoneNumberLookup prospectBinarySearchLookup = new PhoneNumberLookup(new ProspectBinarySearchAlgorithmImpl());
+    private static final PhoneNumberLookup binarySearchLookup = new PhoneNumberLookup(new BinarySearchAlgorithmImpl());
+    private static final PhoneNumberLookup anotherBinarySearchLookup = new PhoneNumberLookup(new AnotherBinarySearchAlgorithmImpl());
+    private static final PhoneNumberLookup sequenceLookup = new PhoneNumberLookup(new SequenceLookupAlgorithmImpl());
+    private static final PhoneNumberLookup prospectBinarySearchLookup = new PhoneNumberLookup(new ProspectBinarySearchAlgorithmImpl());
 
     @Benchmark
     public void binarySearchLookup(PhoneNumbers phoneNumbers) {
