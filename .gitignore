@@ -25,3 +25,6 @@ hs_err_pid*
 # output
 target
 out
+
+# idea
+/.idea
