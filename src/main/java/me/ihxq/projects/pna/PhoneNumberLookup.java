@@ -22,9 +22,9 @@ public class PhoneNumberLookup {
     private static final String PHONE_NUMBER_GEO_PHONE_DAT = "phone.dat";
     private final LookupAlgorithm lookupAlgorithm;
     /**
-     * 数据版本hash值, 版本:202108
+     * 数据版本hash值, 版本:202302
      */
-    private static final int dataHash = -2145792333;
+    private static final int DATA_HASH = 1990190400;
 
     private void init() {
         try {
@@ -40,8 +40,8 @@ public class PhoneNumberLookup {
             }
             int hashCode = Arrays.hashCode(allBytes);
             log.debug("loaded datasource, size: {}, hash: {}", allBytes.length, hashCode);
-            if (hashCode != dataHash) {
-                throw new IllegalStateException("Hash of data not match, expect: " + dataHash + ", actually: " + hashCode);
+            if (hashCode != DATA_HASH) {
+                throw new IllegalStateException("Hash of data not match, expect: " + DATA_HASH + ", actually: " + hashCode);
             }
             lookupAlgorithm.loadData(allBytes);
         } catch (Exception e) {
