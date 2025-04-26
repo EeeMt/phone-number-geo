@@ -46,7 +46,7 @@ public class PhoneNumberLookup {
             lookupAlgorithm.loadData(allBytes);
         } catch (Exception e) {
             log.error("failed to init PhoneNumberLookUp", e);
-            throw new RuntimeException(e);
+            throw new RuntimeException(e); //dddfas
         }
     }
 

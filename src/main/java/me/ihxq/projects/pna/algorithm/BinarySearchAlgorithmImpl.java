@@ -16,7 +16,6 @@ import java.util.Optional;
  * 2019/10/19 00:12
  **/
 @Slf4j
-@SuppressWarnings("DuplicatedCode")
 public class BinarySearchAlgorithmImpl implements LookupAlgorithm {
     private ByteBuffer originalByteBuffer;
     private int indicesStartOffset;
@@ -41,7 +40,7 @@ public class BinarySearchAlgorithmImpl implements LookupAlgorithm {
         if (pos - indicesStartOffset < 9) {
             return pos - remain;
         } else if (remain != 0) {
-            return pos + 9 - remain;
+              return pos + 9 - remain;
         } else {
             return pos;
         }

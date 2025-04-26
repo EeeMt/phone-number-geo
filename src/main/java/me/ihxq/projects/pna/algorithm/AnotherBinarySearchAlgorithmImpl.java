@@ -1,5 +1,6 @@
 package me.ihxq.projects.pna.algorithm;
 
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import me.ihxq.projects.pna.Attribution;
 import me.ihxq.projects.pna.ISP;
@@ -153,5 +154,10 @@ public class AnotherBinarySearchAlgorithmImpl implements LookupAlgorithm {
             throw new RuntimeException(e);
         }
         return Integer.compare(phonePrefix, key);
+    }
+
+    @NonNull
+    public String aa() {
+        return null;
     }
 }

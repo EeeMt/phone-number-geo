@@ -38,4 +38,10 @@ public enum ISP {
                 .filter(v -> v.value == value)
                 .findAny();
     }
+
+    public static void main(String[] args) {
+        if (false) {
+            System.out.println(1);
+        }
+    }
 }

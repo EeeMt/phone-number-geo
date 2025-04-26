@@ -27,7 +27,6 @@ public class SequenceLookupAlgorithmImpl implements LookupAlgorithm {
         indicesOffset = originalByteBuffer.getInt(4);
     }
 
-    @SuppressWarnings("DuplicatedCode")
     @Override
     public Optional<PhoneNumberInfo> lookup(String phoneNo) {
         ByteBuffer byteBuffer = originalByteBuffer.asReadOnlyBuffer().order(ByteOrder.LITTLE_ENDIAN);
