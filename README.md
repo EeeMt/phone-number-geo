@@ -11,9 +11,9 @@
 
 ## 数据源
 
-数据源`dat`文件来自[xluohome/phonedata](https://github.com/xluohome/phonedata)提供的数据库, 会不定时同步更新数据库
+数据源`dat`文件来自[pangongzi/phone](https://github.com/pangongzi/phone)提供的数据库, 会不定时同步更新数据库
 
-当前数据源版本: `202302`
+当前数据源版本: `202502`
 ## maven
 ```xml
 <dependency>

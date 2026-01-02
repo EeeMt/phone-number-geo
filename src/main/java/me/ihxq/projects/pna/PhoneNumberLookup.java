@@ -22,9 +22,9 @@ public class PhoneNumberLookup {
     private static final String PHONE_NUMBER_GEO_PHONE_DAT = "phone.dat";
     private final LookupAlgorithm lookupAlgorithm;
     /**
-     * 数据版本hash值, 版本:202302
+     * 数据版本hash值, 版本:202502
      */
-    private static final int DATA_HASH = 1990190400;
+    private static final int DATA_HASH = -270431608;
 
     private void init() {
         try {
