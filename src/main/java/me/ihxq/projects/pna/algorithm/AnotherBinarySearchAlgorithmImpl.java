@@ -7,6 +7,7 @@ import me.ihxq.projects.pna.PhoneNumberInfo;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -133,7 +134,7 @@ public class AnotherBinarySearchAlgorithmImpl implements LookupAlgorithm {
                 bytes = Arrays.copyOf(bytes, resultBufferSize);
             }
         }
-        String oriString = new String(bytes, 0, i);
+        String oriString = new String(bytes, 0, i, StandardCharsets.UTF_8);
         String[] split = oriString.split("\\|");
         Attribution build = Attribution.builder()
                 .province(split[0])

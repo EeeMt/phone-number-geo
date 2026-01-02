@@ -7,6 +7,7 @@ import me.ihxq.projects.pna.PhoneNumberInfo;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 /**
@@ -113,7 +114,7 @@ public class ProspectBinarySearchAlgorithmImpl implements LookupAlgorithm {
 
         byte[] bytes = new byte[determineInfoLength(infoStartIndex, byteBuffer)];
         byteBuffer.get(bytes);
-        String oriString = new String(bytes);
+        String oriString = new String(bytes, StandardCharsets.UTF_8);
         Attribution attribution = parse(oriString);
 
         return Optional.of(new PhoneNumberInfo(phoneNumber, attribution, isp));

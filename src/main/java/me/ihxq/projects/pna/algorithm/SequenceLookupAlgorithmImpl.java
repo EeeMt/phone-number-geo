@@ -7,6 +7,7 @@ import me.ihxq.projects.pna.PhoneNumberInfo;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 /**
@@ -68,7 +69,7 @@ public class SequenceLookupAlgorithmImpl implements LookupAlgorithm {
                 int length = infoEnd - infoStart;
                 byte[] bytes = new byte[length];
                 byteBuffer.get(bytes, 0, length);
-                String oriString = new String(bytes);
+                String oriString = new String(bytes, StandardCharsets.UTF_8);
                 String[] split = oriString.split("\\|");
                 Attribution build = Attribution.builder()
                         .province(split[0])
